@@ -46,7 +46,8 @@ texture = ExtResource( 3 )
 
 [node name="Torch" parent="CameraBody" instance=ExtResource( 4 )]
 scale = Vector2( 0.5, 0.5 )
-offset = Vector2( 360, 0 )
+offset = Vector2( 340, 0 )
+texture_scale = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraBody"]
 autoplay = "CameraLoop"
