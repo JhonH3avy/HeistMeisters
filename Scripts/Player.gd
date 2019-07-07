@@ -1,9 +1,14 @@
 extends "res://Scripts/Character.gd"
 
 var motion = Vector2()
+var vision_mode
+
+enum available_vision_modes {DARK, NIGHT_VISION}
+
 
 func _ready():
 	Global.Player = self
+	vision_mode = available_vision_modes.DARK
 
 
 func _process(delta):
@@ -28,10 +33,27 @@ func update_motion(delta):
 		motion.y = lerp(motion.y, 0, FRICTION)
 		
 		
-#func _input(event):
-#	if Input.is_action_just_pressed("switch_flashlight"):
-#		switch_flashlight()
-#
-#
-#func switch_flashlight():
-#	$Torch.enabled = not $Torch.enabled
+func _input(event):
+	if Input.is_action_just_pressed("vision_mode_switch") and $VisionChangeCooldown.is_stopped():
+		$VisionChangeCooldown.start()
+		cycle_vision_mode()
+
+
+func cycle_vision_mode():
+	if vision_mode == available_vision_modes.DARK:
+		get_tree().call_group("vision_interface", "night_vision_mode")
+		vision_mode = available_vision_modes.NIGHT_VISION
+		play_vision_change_sfx(Global.night_vision_on_sfx)
+	elif vision_mode == available_vision_modes.NIGHT_VISION:
+		get_tree().call_group("vision_interface", "dark_vision_mode")
+		vision_mode = available_vision_modes.DARK
+		play_vision_change_sfx(Global.night_vision_off_sfx)
+		
+
+func _on_VisionChangeCooldown_timeout():
+	$VisionChangeCooldown.stop()
+
+
+func play_vision_change_sfx(sfx_path):
+	$AudioStreamPlayer.stream = load(sfx_path)
+	$AudioStreamPlayer.play()

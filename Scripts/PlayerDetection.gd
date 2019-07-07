@@ -6,7 +6,11 @@ export var MAX_DETECTION_RANGE = 320
 export var detection_color : Color
 export var neutral_color: Color
 
-onready var Player = get_node("/root/Level1/Player")
+onready var Player = Global.Player
+
+
+func _ready():
+	add_to_group("vision_interface")
 
 
 # warning-ignore:unused_argument
@@ -38,3 +42,11 @@ func Player_is_in_LOS():
 		return true
 	else:
 		return false
+		
+		
+func night_vision_mode():
+	$Torch.enabled = false
+	
+	
+func dark_vision_mode():
+	$Torch.enabled = true
