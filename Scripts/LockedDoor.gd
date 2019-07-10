@@ -19,3 +19,7 @@ func _on_NumberPad_combination_correct():
 func _on_Computer_combination_generated(generated_combination):
 	combination = generated_combination
 	$CanvasLayer/NumberPad.combination = combination
+
+
+func _on_ExitDetection_body_entered(body):
+	open()

@@ -156,7 +156,6 @@ position = Vector2( 1056, 416 )
 rotation = -1.5708
 
 [node name="LockedDoors" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="LockedDoor" parent="LockedDoors" instance=ExtResource( 12 )]
 position = Vector2( 1632, -164.606 )

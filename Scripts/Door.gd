@@ -16,7 +16,8 @@ func _on_Door_body_exited(body):
 
 
 func open():
-	$AnimationPlayer.play("Open")
+	if not $AnimationPlayer.is_playing():
+		$AnimationPlayer.play("Open")
 	
 	
 func _input_event(viewport, event, shape_idx):
