@@ -1,37 +1,45 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Theme.tres" type="Theme" id=1]
-[ext_resource path="res://GFX/Interface/PNG/metalPanel.png" type="Texture" id=2]
-[ext_resource path="res://GFX/Interface/PNG/glassPanel.png" type="Texture" id=3]
-[ext_resource path="res://GFX/Interface/PNG/dotRed.png" type="Texture" id=4]
-[ext_resource path="res://GFX/Interface/PNG/metalPanel_greenCorner.png" type="Texture" id=5]
-[ext_resource path="res://GFX/Interface/PNG/metalPanel_redCorner.png" type="Texture" id=6]
-[ext_resource path="res://GFX/Interface/PNG/metalPanel_blueCorner.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/NumberPad.gd" type="Script" id=2]
+[ext_resource path="res://GFX/Interface/PNG/dotRed.png" type="Texture" id=3]
+[ext_resource path="res://GFX/Interface/PNG/dotGreen.png" type="Texture" id=4]
+[ext_resource path="res://SFX/twoTone1.ogg" type="AudioStream" id=5]
+[ext_resource path="res://SFX/threeTone1.ogg" type="AudioStream" id=6]
+[ext_resource path="res://GFX/Interface/PNG/metalPanel.png" type="Texture" id=7]
+[ext_resource path="res://GFX/Interface/PNG/glassPanel.png" type="Texture" id=8]
+[ext_resource path="res://GFX/Interface/PNG/metalPanel_greenCorner.png" type="Texture" id=9]
+[ext_resource path="res://GFX/Interface/PNG/metalPanel_redCorner.png" type="Texture" id=10]
+[ext_resource path="res://GFX/Interface/PNG/metalPanel_blueCorner.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 5 )
+texture = ExtResource( 9 )
 region_rect = Rect2( 0, 0, 100, 100 )
 
 [sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 6 )
+texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 100, 100 )
 
 [sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 7 )
+texture = ExtResource( 11 )
 region_rect = Rect2( 0, 0, 100, 100 )
 
 [node name="NumberPad" type="Popup"]
-visible = true
 margin_right = 340.0
 margin_bottom = 340.0
 rect_min_size = Vector2( 340, 340 )
 theme = ExtResource( 1 )
+script = ExtResource( 2 )
+red_light_sprite = ExtResource( 3 )
+green_light_sprite = ExtResource( 4 )
+button_push_sfx = ExtResource( 5 )
+combination_correct_sfx = ExtResource( 6 )
 
 [node name="Background" type="NinePatchRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 50.0
-texture = ExtResource( 2 )
+texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 100, 100 )
 patch_margin_left = 12
 patch_margin_top = 12
@@ -39,6 +47,7 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="VSplitContainer" type="VSplitContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -56,7 +65,7 @@ margin_left = 35.0
 margin_right = 285.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 250, 100 )
-texture = ExtResource( 3 )
+texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 100.022, 100 )
 patch_margin_left = 4
 patch_margin_top = 4
@@ -70,18 +79,18 @@ margin_right = 260.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 200, 50 )
 theme = ExtResource( 1 )
-text = "TEST"
+bbcode_enabled = true
 
 [node name="ButtonContainer" type="CenterContainer" parent="VSplitContainer"]
 margin_top = 112.0
 margin_right = 320.0
-margin_bottom = 384.0
+margin_bottom = 320.0
 
 [node name="ButtonGrid" type="GridContainer" parent="VSplitContainer/ButtonContainer"]
-margin_left = 92.0
-margin_top = 44.0
-margin_right = 228.0
-margin_bottom = 228.0
+margin_left = 160.0
+margin_top = 104.0
+margin_right = 160.0
+margin_bottom = 104.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 8
 columns = 3
@@ -205,7 +214,7 @@ margin_top = 144.0
 margin_right = 40.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 expand = true
 
 [node name="Button0" type="Button" parent="VSplitContainer/ButtonContainer/ButtonGrid"]
@@ -238,3 +247,10 @@ custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 text = "OK"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
