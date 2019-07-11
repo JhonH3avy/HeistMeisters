@@ -1,20 +1,42 @@
 extends "res://Scripts/Character.gd"
 
+
+export var disguises = 3 # How many disguises you start with
+export var disguse_duration = 5 # How long disguise can last
+export var disguise_slowdown = 0.25
+
 var motion = Vector2()
-var vision_mode
+
+var is_disguised = false
+var velocity_multiplier = 1
 
 enum available_vision_modes {DARK, NIGHT_VISION}
+
+var vision_mode
+
+onready var box_occluder = load(Global.box_occluder)
+onready var box_sprite = load(Global.box_sprite)
+onready var box_collision_shape = load(Global.box_collision_shape)
+
+onready var player_occluder = load(Global.player_occluder)
+onready var player_sprite = load(Global.player_sprite)
+onready var player_collision_shape = load(Global.player_collision_shape)
+
 
 
 func _ready():
 	Global.Player = self
 	vision_mode = available_vision_modes.DARK
 	get_tree().call_group("vision_interface", "dark_vision_mode")
+	reveal()
 
 
 func _process(delta):
 	update_motion(delta)
-	motion = move_and_slide(motion)
+	move_and_slide(motion * velocity_multiplier)
+	if is_disguised:
+		$DisguiseLifetimeFeedback.rect_rotation = -rotation_degrees
+		$DisguiseLifetimeFeedback.text = str($DisguiseLifetime.time_left).pad_decimals(2)
 
 
 func update_motion(delta):
@@ -38,6 +60,8 @@ func _input(event):
 	if Input.is_action_just_pressed("vision_mode_switch") and $VisionChangeCooldown.is_stopped():
 		$VisionChangeCooldown.start()
 		cycle_vision_mode()
+	if Input.is_action_just_pressed("toggle_disguise"):
+		toggle_disguise()
 
 
 func cycle_vision_mode():
@@ -58,3 +82,36 @@ func _on_VisionChangeCooldown_timeout():
 func play_vision_change_sfx(sfx_path):
 	$AudioStreamPlayer.stream = load(sfx_path)
 	$AudioStreamPlayer.play()
+	
+
+func toggle_disguise():
+	if is_disguised:
+		reveal()
+	elif disguises > 0:
+		disguise()
+	
+
+func disguise():
+	disguises -= 1
+	$DisguiseLifetimeFeedback.show()
+	$Sprite.texture = box_sprite
+	$Light2D.texture = box_sprite
+	$LightOccluder2D.occluder = box_occluder
+	$CollisionShape2D.shape = box_collision_shape
+	collision_layer = 16
+	velocity_multiplier = disguise_slowdown
+	$DisguiseLifetime.start()
+	is_disguised = true
+	
+
+func reveal():
+	$DisguiseLifetimeFeedback.hide()
+	$Sprite.texture = player_sprite
+	$Light2D.texture = player_sprite
+	$LightOccluder2D.occluder = player_occluder	
+	$CollisionShape2D.shape = player_collision_shape
+	collision_layer = 1
+	velocity_multiplier = 1
+	is_disguised = false
+	
+

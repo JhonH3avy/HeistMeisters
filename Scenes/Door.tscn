@@ -69,7 +69,7 @@ polygon = PoolVector2Array( -32, -10, 31.998, -10.1891, 32, 10, -32, 10 )
 
 [node name="Door" type="Area2D"]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 25
 script = ExtResource( 1 )
 
 [node name="PlayerDetectionArea" type="CollisionShape2D" parent="."]
@@ -86,7 +86,7 @@ texture = ExtResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 29
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
 visible = false

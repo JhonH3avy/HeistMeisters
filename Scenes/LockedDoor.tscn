@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.0443, 20 )
 
-[node name="LockedDoor" groups=[
+[node name="LockedDoor" index="0" groups=[
 "vision_interface",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -23,6 +23,7 @@ texture = ExtResource( 3 )
 
 [node name="ExitDetection" type="Area2D" parent="." index="5"]
 collision_layer = 0
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDetection" index="0"]
 position = Vector2( 0, -30 )

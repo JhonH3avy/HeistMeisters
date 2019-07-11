@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/ComputerPopup.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/ComputerPopup.gd" type="Script" id=1]
 [ext_resource path="res://GFX/Interface/PNG/metalPanel.png" type="Texture" id=2]
 [ext_resource path="res://GFX/Interface/PNG/glassPanel.png" type="Texture" id=3]
 [ext_resource path="res://GFX/Interface/PNG/dotGreen.png" type="Texture" id=4]
 [ext_resource path="res://Theme.tres" type="Theme" id=5]
+
 
 [node name="CanvasLayer" type="Popup"]
 margin_right = 600.0

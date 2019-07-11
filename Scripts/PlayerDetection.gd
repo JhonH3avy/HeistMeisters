@@ -17,6 +17,7 @@ func _ready():
 func _process(delta):
 	if Player_is_in_FOV_TOLERANCE() and Player_is_in_LOS():
 		$Torch.color = detection_color
+		get_tree().call_group("suspicion_meter", "player_seen")
 	else:
 		$Torch.color = neutral_color
 
@@ -34,6 +35,9 @@ func Player_is_in_FOV_TOLERANCE():
 func Player_is_in_LOS():
 	var space = get_world_2d().direct_space_state
 	var LOS_obstacle = space.intersect_ray(global_position, Player.global_position, [self], collision_mask)
+	
+	if not LOS_obstacle:
+		return false	
 	
 	var distance_to_Player = Player.global_position.distance_to(global_position)
 	var Player_in_range = distance_to_Player < MAX_DETECTION_RANGE

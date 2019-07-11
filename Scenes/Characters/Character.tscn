@@ -2,14 +2,8 @@
 
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=1]
 [ext_resource path="res://GFX/PNG/Man Red/manRed_stand.png" type="Texture" id=2]
-
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 12.8255
-height = 24.8874
-
-[sub_resource type="OccluderPolygon2D" id=2]
-cull_mode = 1
-polygon = PoolVector2Array( -11.5162, -15.1432, -6.54567, -20.5656, 2.49174, -20.7915, 7.01044, -14.4654, 10.3724, -0.53384, 7.01044, 15.3581, 1.81393, 21.0064, -6.7716, 21.2324, -11.7422, 14.0025 )
+[ext_resource path="res://Scenes/Characters/CharacterCollisionShape.tres" type="Shape2D" id=3]
+[ext_resource path="res://Scenes/Characters/CharacterOccluder.tres" type="OccluderPolygon2D" id=4]
 
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -18,7 +12,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = ExtResource( 3 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 2 )
+occluder = ExtResource( 4 )
