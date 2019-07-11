@@ -7,11 +7,20 @@ var combination
 
 signal combination_generated
 
+export var lock_group = "Unset"
+
 
 func _ready():
 	$Light2D.enabled = false
 	generate_combination()
-	emit_signal("combination_generated", combination)
+	emit_signal("combination_generated", combination, lock_group)
+	init_label()
+
+
+func init_label():
+	$Label.rect_pivot_offset = $Label.rect_size / 2
+	$Label.rect_rotation = -rotation_degrees
+	$Label.text = lock_group
 
 
 func _on_Computer_body_entered(body):
@@ -39,3 +48,11 @@ func generate_combination():
 
 func set_popup_text():
 	$CanvasLayer/ComputerPopup.set_text(PoolStringArray(combination).join(""))
+
+
+func night_vision_mode():
+	$Label.percent_visible = 1
+	
+	
+func dark_vision_mode():
+	$Label.percent_visible = 0

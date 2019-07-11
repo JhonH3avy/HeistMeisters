@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Computer.gd" type="Script" id=1]
 [ext_resource path="res://GFX/PNG/Tiles/tile_537.png" type="Texture" id=2]
 [ext_resource path="res://GFX/PNG/Tiles/tile_519.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/ComputerPopup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Theme.tres" type="Theme" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 64 )
 
-[node name="Computer" type="Area2D"]
+[node name="Computer" type="Area2D" groups=[
+"vision_interface",
+]]
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -29,6 +32,13 @@ color = Color( 0.270588, 0.815686, 0.831373, 1 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ComputerPopup" parent="CanvasLayer" instance=ExtResource( 4 )]
-visible = false
+
+[node name="Label" type="Label" parent="."]
+margin_left = -62.9999
+margin_top = -8.99997
+margin_right = -22.9999
+margin_bottom = 9.00003
+theme = ExtResource( 5 )
+text = "Test"
 [connection signal="body_entered" from="." to="." method="_on_Computer_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Computer_body_exited"]

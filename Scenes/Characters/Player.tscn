@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://GFX/PNG/Hitman 1/hitman1_stand.png" type="Texture" id=3]
 
-[node name="Player" instance=ExtResource( 1 )]
+[node name="Player" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
@@ -15,6 +15,9 @@ visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
 current = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
 
 [node name="Light2D" type="Light2D" parent="." index="4"]
 texture = ExtResource( 3 )

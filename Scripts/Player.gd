@@ -9,6 +9,7 @@ enum available_vision_modes {DARK, NIGHT_VISION}
 func _ready():
 	Global.Player = self
 	vision_mode = available_vision_modes.DARK
+	get_tree().call_group("vision_interface", "dark_vision_mode")
 
 
 func _process(delta):
