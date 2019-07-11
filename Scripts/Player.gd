@@ -28,6 +28,7 @@ func _ready():
 	Global.Player = self
 	vision_mode = available_vision_modes.DARK
 	get_tree().call_group("vision_interface", "dark_vision_mode")
+	get_tree().call_group("disguise_ui", "update_disguises", disguises)	
 	reveal()
 
 
@@ -102,6 +103,7 @@ func disguise():
 	velocity_multiplier = disguise_slowdown
 	$DisguiseLifetime.start()
 	is_disguised = true
+	get_tree().call_group("disguise_ui", "update_disguises", disguises)
 	
 
 func reveal():
