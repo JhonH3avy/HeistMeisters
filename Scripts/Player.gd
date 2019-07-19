@@ -117,3 +117,13 @@ func reveal():
 	is_disguised = false
 	
 
+func collect_briefcase():
+	var loot = Node.new()
+	loot.set_name("briefcase")
+	add_child(loot)
+	get_tree().call_group("loot", "collect_loot", Global.briefcase_sprite)
+		
+
+func get_briefcase():
+	var briefcase = get_node("briefcase")
+	return briefcase == null

@@ -16,3 +16,7 @@ var player_occluder = "res://Scenes/Characters/CharacterOccluder.tres"
 
 var box_collision_shape = "res://Scenes/Characters/BoxCollisionShape.tres"
 var player_collision_shape = "res://Scenes/Characters/CharacterCollisionShape.tres"
+
+var briefcase_sprite = "res://GFX/Loot/suitcase.png"
+
+
