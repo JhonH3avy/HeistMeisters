@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Tilesets/FloorTiles.tres" type="TileSet" id=1]
+[ext_resource path="res://Tilesets/AutoTilesWalls.tres" type="TileSet" id=2]
+[ext_resource path="res://Tilesets/Furniture.tres" type="TileSet" id=3]
+[ext_resource path="res://Scenes/Characters/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/CombinationGenerator.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/VisionMode.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Exit.tscn" type="PackedScene" id=7]
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="Floors" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+
+[node name="Walls" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+format = 1
+
+[node name="Furniture" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+format = 1
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+
+[node name="CombinationGenerator" parent="." instance=ExtResource( 5 )]
+
+[node name="VisionMode" parent="." instance=ExtResource( 6 )]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="Exit" parent="." instance=ExtResource( 7 )]

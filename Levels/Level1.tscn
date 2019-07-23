@@ -8,7 +8,7 @@
 [ext_resource path="res://Tilesets/AutoTilesWalls.tres" type="TileSet" id=6]
 [ext_resource path="res://Tilesets/Furniture.tres" type="TileSet" id=7]
 [ext_resource path="res://Scenes/Computer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scripts/VisionMode.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/VisionMode.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Characters/Guard.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/LockedDoor.tscn" type="PackedScene" id=12]
@@ -122,12 +122,7 @@ position = Vector2( 1696.27, 227.587 )
 rotation = 3.14159
 lock_group = "CP1"
 
-[node name="VisionMode" type="CanvasModulate" parent="."]
-visible = false
-color = Color( 0.0627451, 0.0627451, 0.34902, 1 )
-script = ExtResource( 9 )
-dark_color = Color( 0.0627451, 0.0627451, 0.34902, 1 )
-night_vision_color = Color( 0.0627451, 0.643137, 0.588235, 1 )
+[node name="VisionMode" parent="." instance=ExtResource( 9 )]
 
 [node name="Guards" type="Node2D" parent="."]
 editor/display_folded = true
